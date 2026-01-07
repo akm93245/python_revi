@@ -22,20 +22,21 @@ def show_events():
 
 
 def main():
-    print("\n==============Welcome, To Event Tracker==============")   
-    
-    print("1. Add Event")
-    print("2. Show Events")
-    print("3. Quit")
-    
-    choice = int(input("choice : "))
-    
     while True:
-        if choice ==1:
+        print("\n==============Welcome, To Event Tracker==============")   
+        
+        print("1. Add Event")
+        print("2. Show Events")
+        print("3. Quit")
+        
+        choice = int(input("choice : "))
+    
+    
+        if choice == 1:
             add_new_event()
         elif choice == 2:
             show_events()
-        elif choice ==3:
+        elif choice == 3:
             print("Thank you for using Event Tracker You you next time time")
             break
         else:
