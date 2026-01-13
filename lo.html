@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lo.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<p>Here’s a detailed explanation of how the <strong>mean</strong>, <strong>variance</strong>, and <strong>standard deviation</strong> were calculated step by step:</p>
+<hr>
+<h3 id="1-mean--barx"><strong>1. Mean (( \bar{X} ))</strong></h3>
+<p>The formula for the mean of grouped data is:</p>
+<p>[
+\bar{X} = \frac{\sum(f \cdot X)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( f ) = frequency</li>
+<li>( X ) = midpoint of the class interval</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Compute the midpoint (( X )) of each class interval:</p>
+<ul>
+<li>( X = \frac{\text{Lower Bound} + \text{Upper Bound}}{2} )</li>
+</ul>
+<p>Example for the first interval (10–15):
+[
+X = \frac{10 + 15}{2} = 12.5
+]</p>
+</li>
+<li>
+<p>Multiply each midpoint (( X )) by its frequency (( f )):</p>
+<ul>
+<li>( f \cdot X )</li>
+</ul>
+</li>
+<li>
+<p>Sum up all the ( f \cdot X ) values:
+[
+\sum(f \cdot X) = 37.5 + 18.5 + 98.0 + 152.5 + 73.0 + 212.5 = 592.0
+]</p>
+</li>
+<li>
+<p>Sum up all the frequencies (( f )):
+[
+\sum f = 3 + 1 + 4 + 5 + 2 + 5 = 20
+]</p>
+</li>
+<li>
+<p>Divide ( \sum(f \cdot X) ) by ( \sum f ):
+[
+\bar{X} = \frac{592.0}{20} = 29.6
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="2-variance--sigma2"><strong>2. Variance (( \sigma^2 ))</strong></h3>
+<p>The formula for variance is:</p>
+<p>[
+\sigma^2 = \frac{\sum(f \cdot (X - \bar{X})^2)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( X ) = midpoint</li>
+<li>( \bar{X} ) = mean</li>
+<li>( f ) = frequency</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Calculate ( (X - \bar{X})^2 ) for each class:</p>
+<ul>
+<li>Example for the first class (10–15, midpoint = 12.5):
+[
+(12.5 - 29.6)^2 = (-17.1)^2 = 292.41
+]</li>
+</ul>
+</li>
+<li>
+<p>Multiply ( (X - \bar{X})^2 ) by the frequency (( f )):</p>
+<ul>
+<li>( f \cdot (X - \bar{X})^2 )</li>
+</ul>
+<p>Example for the first class:
+[
+3 \cdot 292.41 = 877.23
+]</p>
+</li>
+<li>
+<p>Sum up all ( f \cdot (X - \bar{X})^2 ) values:
+[
+\sum(f \cdot (X - \bar{X})^2) = 877.23 + 123.21 + 104.04 + 4.05 + 95.22 + 832.05 = 2035.8
+]</p>
+</li>
+<li>
+<p>Divide the result by ( \sum f ):
+[
+\sigma^2 = \frac{2035.8}{20} = 101.79
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="3-standard-deviation--sigma"><strong>3. Standard Deviation (( \sigma ))</strong></h3>
+<p>The formula for standard deviation is:</p>
+<p>[
+\sigma = \sqrt{\sigma^2}
+]</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>Take the square root of the variance:
+[
+\sigma = \sqrt{101.79} = 10.09
+]</li>
+</ol>
+<hr>
+<p>Let me know if you need further clarification!</p>
+<p>Here’s a detailed explanation of how the <strong>mean</strong>, <strong>variance</strong>, and <strong>standard deviation</strong> were calculated step by step:</p>
+<hr>
+<h3 id="1-mean--barx"><strong>1. Mean (( \bar{X} ))</strong></h3>
+<p>The formula for the mean of grouped data is:</p>
+<p>[
+\bar{X} = \frac{\sum(f \cdot X)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( f ) = frequency</li>
+<li>( X ) = midpoint of the class interval</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Compute the midpoint (( X )) of each class interval:</p>
+<ul>
+<li>( X = \frac{\text{Lower Bound} + \text{Upper Bound}}{2} )</li>
+</ul>
+<p>Example for the first interval (10–15):
+[
+X = \frac{10 + 15}{2} = 12.5
+]</p>
+</li>
+<li>
+<p>Multiply each midpoint (( X )) by its frequency (( f )):</p>
+<ul>
+<li>( f \cdot X )</li>
+</ul>
+</li>
+<li>
+<p>Sum up all the ( f \cdot X ) values:
+[
+\sum(f \cdot X) = 37.5 + 18.5 + 98.0 + 152.5 + 73.0 + 212.5 = 592.0
+]</p>
+</li>
+<li>
+<p>Sum up all the frequencies (( f )):
+[
+\sum f = 3 + 1 + 4 + 5 + 2 + 5 = 20
+]</p>
+</li>
+<li>
+<p>Divide ( \sum(f \cdot X) ) by ( \sum f ):
+[
+\bar{X} = \frac{592.0}{20} = 29.6
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="2-variance--sigma2"><strong>2. Variance (( \sigma^2 ))</strong></h3>
+<p>The formula for variance is:</p>
+<p>[
+\sigma^2 = \frac{\sum(f \cdot (X - \bar{X})^2)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( X ) = midpoint</li>
+<li>( \bar{X} ) = mean</li>
+<li>( f ) = frequency</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Calculate ( (X - \bar{X})^2 ) for each class:</p>
+<ul>
+<li>Example for the first class (10–15, midpoint = 12.5):
+[
+(12.5 - 29.6)^2 = (-17.1)^2 = 292.41
+]</li>
+</ul>
+</li>
+<li>
+<p>Multiply ( (X - \bar{X})^2 ) by the frequency (( f )):</p>
+<ul>
+<li>( f \cdot (X - \bar{X})^2 )</li>
+</ul>
+<p>Example for the first class:
+[
+3 \cdot 292.41 = 877.23
+]</p>
+</li>
+<li>
+<p>Sum up all ( f \cdot (X - \bar{X})^2 ) values:
+[
+\sum(f \cdot (X - \bar{X})^2) = 877.23 + 123.21 + 104.04 + 4.05 + 95.22 + 832.05 = 2035.8
+]</p>
+</li>
+<li>
+<p>Divide the result by ( \sum f ):
+[
+\sigma^2 = \frac{2035.8}{20} = 101.79
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="3-standard-deviation--sigma"><strong>3. Standard Deviation (( \sigma ))</strong></h3>
+<p>The formula for standard deviation is:</p>
+<p>[
+\sigma = \sqrt{\sigma^2}
+]</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>Take the square root of the variance:
+[
+\sigma = \sqrt{101.79} = 10.09
+]</li>
+</ol>
+<hr>
+<p>Let me know if you need further clarification!Here’s a detailed explanation of how the <strong>mean</strong>, <strong>variance</strong>, and <strong>standard deviation</strong> were calculated step by step:</p>
+<hr>
+<h3 id="1-mean--barx"><strong>1. Mean (( \bar{X} ))</strong></h3>
+<p>The formula for the mean of grouped data is:</p>
+<p>[
+\bar{X} = \frac{\sum(f \cdot X)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( f ) = frequency</li>
+<li>( X ) = midpoint of the class interval</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Compute the midpoint (( X )) of each class interval:</p>
+<ul>
+<li>( X = \frac{\text{Lower Bound} + \text{Upper Bound}}{2} )</li>
+</ul>
+<p>Example for the first interval (10–15):
+[
+X = \frac{10 + 15}{2} = 12.5
+]</p>
+</li>
+<li>
+<p>Multiply each midpoint (( X )) by its frequency (( f )):</p>
+<ul>
+<li>( f \cdot X )</li>
+</ul>
+</li>
+<li>
+<p>Sum up all the ( f \cdot X ) values:
+[
+\sum(f \cdot X) = 37.5 + 18.5 + 98.0 + 152.5 + 73.0 + 212.5 = 592.0
+]</p>
+</li>
+<li>
+<p>Sum up all the frequencies (( f )):
+[
+\sum f = 3 + 1 + 4 + 5 + 2 + 5 = 20
+]</p>
+</li>
+<li>
+<p>Divide ( \sum(f \cdot X) ) by ( \sum f ):
+[
+\bar{X} = \frac{592.0}{20} = 29.6
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="2-variance--sigma2"><strong>2. Variance (( \sigma^2 ))</strong></h3>
+<p>The formula for variance is:</p>
+<p>[
+\sigma^2 = \frac{\sum(f \cdot (X - \bar{X})^2)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( X ) = midpoint</li>
+<li>( \bar{X} ) = mean</li>
+<li>( f ) = frequency</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Calculate ( (X - \bar{X})^2 ) for each class:</p>
+<ul>
+<li>Example for the first class (10–15, midpoint = 12.5):
+[
+(12.5 - 29.6)^2 = (-17.1)^2 = 292.41
+]</li>
+</ul>
+</li>
+<li>
+<p>Multiply ( (X - \bar{X})^2 ) by the frequency (( f )):</p>
+<ul>
+<li>( f \cdot (X - \bar{X})^2 )</li>
+</ul>
+<p>Example for the first class:
+[
+3 \cdot 292.41 = 877.23
+]</p>
+</li>
+<li>
+<p>Sum up all ( f \cdot (X - \bar{X})^2 ) values:
+[
+\sum(f \cdot (X - \bar{X})^2) = 877.23 + 123.21 + 104.04 + 4.05 + 95.22 + 832.05 = 2035.8
+]</p>
+</li>
+<li>
+<p>Divide the result by ( \sum f ):
+[
+\sigma^2 = \frac{2035.8}{20} = 101.79
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="3-standard-deviation--sigma"><strong>3. Standard Deviation (( \sigma ))</strong></h3>
+<p>The formula for standard deviation is:</p>
+<p>[
+\sigma = \sqrt{\sigma^2}
+]</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>Take the square root of the variance:
+[
+\sigma = \sqrt{101.79} = 10.09
+]Here’s a detailed explanation of how the <strong>mean</strong>, <strong>variance</strong>, and <strong>standard deviation</strong> were calculated step by step:</li>
+</ol>
+<hr>
+<h3 id="1-mean--barx"><strong>1. Mean (( \bar{X} ))</strong></h3>
+<p>The formula for the mean of grouped data is:</p>
+<p>[
+\bar{X} = \frac{\sum(f \cdot X)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( f ) = frequency</li>
+<li>( X ) = midpoint of the class interval</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Compute the midpoint (( X )) of each class interval:</p>
+<ul>
+<li>( X = \frac{\text{Lower Bound} + \text{Upper Bound}}{2} )</li>
+</ul>
+<p>Example for the first interval (10–15):
+[
+X = \frac{10 + 15}{2} = 12.5
+]</p>
+</li>
+<li>
+<p>Multiply each midpoint (( X )) by its frequency (( f )):</p>
+<ul>
+<li>( f \cdot X )</li>
+</ul>
+</li>
+<li>
+<p>Sum up all the ( f \cdot X ) values:
+[
+\sum(f \cdot X) = 37.5 + 18.5 + 98.0 + 152.5 + 73.0 + 212.5 = 592.0
+]</p>
+</li>
+<li>
+<p>Sum up all the frequencies (( f )):
+[
+\sum f = 3 + 1 + 4 + 5 + 2 + 5 = 20
+]</p>
+</li>
+<li>
+<p>Divide ( \sum(f \cdot X) ) by ( \sum f ):
+[
+\bar{X} = \frac{592.0}{20} = 29.6
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="2-variance--sigma2"><strong>2. Variance (( \sigma^2 ))</strong></h3>
+<p>The formula for variance is:</p>
+<p>[
+\sigma^2 = \frac{\sum(f \cdot (X - \bar{X})^2)}{\sum f}
+]</p>
+<p>Where:</p>
+<ul>
+<li>( X ) = midpoint</li>
+<li>( \bar{X} ) = mean</li>
+<li>( f ) = frequency</li>
+</ul>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>
+<p>Calculate ( (X - \bar{X})^2 ) for each class:</p>
+<ul>
+<li>Example for the first class (10–15, midpoint = 12.5):
+[
+(12.5 - 29.6)^2 = (-17.1)^2 = 292.41
+]</li>
+</ul>
+</li>
+<li>
+<p>Multiply ( (X - \bar{X})^2 ) by the frequency (( f )):</p>
+<ul>
+<li>( f \cdot (X - \bar{X})^2 )</li>
+</ul>
+<p>Example for the first class:
+[
+3 \cdot 292.41 = 877.23
+]</p>
+</li>
+<li>
+<p>Sum up all ( f \cdot (X - \bar{X})^2 ) values:
+[
+\sum(f \cdot (X - \bar{X})^2) = 877.23 + 123.21 + 104.04 + 4.05 + 95.22 + 832.05 = 2035.8
+]</p>
+</li>
+<li>
+<p>Divide the result by ( \sum f ):
+[
+\sigma^2 = \frac{2035.8}{20} = 101.79
+]</p>
+</li>
+</ol>
+<hr>
+<h3 id="3-standard-deviation--sigma"><strong>3. Standard Deviation (( \sigma ))</strong></h3>
+<p>The formula for standard deviation is:</p>
+<p>[
+\sigma = \sqrt{\sigma^2}
+]</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>Take the square root of the variance:
+[
+\sigma = \sqrt{101.79} = 10.09
+]</li>
+</ol>
+<hr>
+<p>Let me know if you need further clarification!k</p>
+<hr>
+<p>Let me know if you need further clarification!</p>
+<hr>
+<hr>
+<hr>
+<h3 id="results">Results:</h3>
+<h4 id="frequency-table-with-calculations">Frequency Table with Calculations:</h4>
+<table>
+<thead>
+<tr>
+<th>Class Interval</th>
+<th>Frequency (f)</th>
+<th>Midpoint (X)</th>
+<th>f * X</th>
+<th>(X - X̄)²</th>
+<th>f * (X - X̄)²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10-15</td>
+<td>3</td>
+<td>12.5</td>
+<td>37.5</td>
+<td>292.41</td>
+<td>877.23</td>
+</tr>
+<tr>
+<td>16-21</td>
+<td>1</td>
+<td>18.5</td>
+<td>18.5</td>
+<td>123.21</td>
+<td>123.21</td>
+</tr>
+<tr>
+<td>22-27</td>
+<td>4</td>
+<td>24.5</td>
+<td>98.0</td>
+<td>26.01</td>
+<td>104.04</td>
+</tr>
+<tr>
+<td>28-33</td>
+<td>5</td>
+<td>30.5</td>
+<td>152.5</td>
+<td>0.81</td>
+<td>4.05</td>
+</tr>
+<tr>
+<td>34-39</td>
+<td>2</td>
+<td>36.5</td>
+<td>73.0</td>
+<td>47.61</td>
+<td>95.22</td>
+</tr>
+<tr>
+<td>40-45</td>
+<td>5</td>
+<td>42.5</td>
+<td>212.5</td>
+<td>166.41</td>
+<td>832.05</td>
+</tr>
+</tbody>
+</table>
+<h4 id="summary-statistics">Summary Statistics:</h4>
+<ul>
+<li><strong>Mean (( \bar{X} ))</strong>: ( 29.6 )</li>
+<li><strong>Variance (( \sigma^2 ))</strong>: ( 101.79 )</li>
+<li><strong>Standard Deviation (( \sigma ))</strong>: ( 10.09 )</li>
+</ul>
+<p>Let me know if you need further clarification or additional calculations!</p>
+<hr>
+<hr>
+<hr>
+<p>Sure! Let's solve the questions one by one.</p>
+<hr>
+<h3 id="qno1-a-difference-between-descriptive-statistics-and-inferential-statistics"><strong>Q.no1 (a): Difference between Descriptive Statistics and Inferential Statistics</strong></h3>
+<ul>
+<li>
+<p><strong>Descriptive Statistics</strong>:</p>
+<ul>
+<li><strong>Definition</strong>: Deals with methods of organizing, summarizing, and presenting data in an informative way.</li>
+<li><strong>Examples</strong>: Calculating the mean, median, mode, and creating graphs like histograms.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inferential Statistics</strong>:</p>
+<ul>
+<li><strong>Definition</strong>: Deals with methods for making predictions or inferences about a population based on sample data.</li>
+<li><strong>Examples</strong>: Hypothesis testing, confidence intervals, and regression analysis.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="qno1-b-construction-of-tally-column-midpoint-x-cumulative-frequency-and-class-boundaries"><strong>Q.no1 (b): Construction of Tally Column, Midpoint (X), Cumulative Frequency, and Class Boundaries</strong></h3>
+<h4 id="data">Data:</h4>
+<p>Marks: (30-39, 40-49, 50-59, 60-69, 70-79, 80-89, 90-99)<br>
+Frequency: (4, 7, 13, 15, 6, 3, 2)</p>
+<ol>
+<li>
+<p><strong>Class Boundaries</strong>:</p>
+<ul>
+<li>(29.5-39.5, 39.5-49.5, 49.5-59.5, 59.5-69.5, 69.5-79.5, 79.5-89.5, 89.5-99.5)</li>
+</ul>
+</li>
+<li>
+<p><strong>Midpoints (X)</strong>:<br>
+Formula: (\text{Midpoint} = \frac{\text{Lower limit} + \text{Upper limit}}{2})<br>
+(X = 34.5, 44.5, 54.5, 64.5, 74.5, 84.5, 94.5)</p>
+</li>
+<li>
+<p><strong>Cumulative Frequency</strong>:
+Add frequencies cumulatively:<br>
+(4, 11, 24, 39, 45, 48, 50)</p>
+</li>
+</ol>
+<hr>
+<h3 id="qno2-a-difference-between-standard-deviation-and-variance"><strong>Q.no2 (a): Difference between Standard Deviation and Variance</strong></h3>
+<ul>
+<li>
+<p><strong>Standard Deviation</strong>:</p>
+<ul>
+<li>Measures the spread of data points from the mean.</li>
+<li>Formula: (\sigma = \sqrt{\frac{\sum (X - \bar{X})^2}{N}})</li>
+</ul>
+</li>
+<li>
+<p><strong>Variance</strong>:</p>
+<ul>
+<li>Measures the average squared deviation from the mean.</li>
+<li>Formula: (\sigma^2 = \frac{\sum (X - \bar{X})^2}{N})</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="qno2-b-calculate-variance-and-standard-deviation"><strong>Q.no2 (b): Calculate Variance and Standard Deviation</strong></h3>
+<h4 id="data">Data:</h4>
+<p>Scores: (10-15, 16-21, 22-27, 28-33, 34-39, 40-45)<br>
+Frequency ((f)): (3, 1, 4, 5, 2, 5)</p>
+<p>Steps:</p>
+<ol>
+<li>Find the midpoints ((X)).</li>
+<li>Calculate (f \cdot X), ((X - \bar{X})^2), and (f \cdot (X - \bar{X})^2).</li>
+<li>Compute variance ((\sigma^2)) and standard deviation ((\sigma)).</li>
+</ol>
+<hr>
+<h3 id="qno3-a-define-population-sample-parameter-and-statistic"><strong>Q.no3 (a): Define Population, Sample, Parameter, and Statistic</strong></h3>
+<ul>
+<li>
+<p><strong>Population</strong>: The entire group of individuals or items being studied.<br>
+Example: All students in a school.</p>
+</li>
+<li>
+<p><strong>Sample</strong>: A subset of the population used for analysis.<br>
+Example: A group of 50 students from the school.</p>
+</li>
+<li>
+<p><strong>Parameter</strong>: A numerical value summarizing a characteristic of a population.<br>
+Example: Average height of all students in the school.</p>
+</li>
+<li>
+<p><strong>Statistic</strong>: A numerical value summarizing a characteristic of a sample.<br>
+Example: Average height of the sampled 50 students.</p>
+</li>
+</ul>
+<hr>
+<h3 id="qno3-b-calculate-median"><strong>Q.no3 (b): Calculate Median</strong></h3>
+<h4 id="data">Data:</h4>
+<p>Marks: (30-39, 40-49, 50-59, 60-69, 70-79, 80-89, 90-99)<br>
+Frequency ((f)): (11, 15, 17, 20, 18, 12, 7)</p>
+<ol>
+<li>Find the cumulative frequency.</li>
+<li>Determine the median class using (N/2), where (N = \sum f = 100).</li>
+<li>Use the formula:<br>
+[
+\text{Median} = L + \left(\frac{\frac{N}{2} - CF}{f_m}\right) \cdot h
+]<br>
+Where:
+<ul>
+<li>(L = \text{Lower boundary of median class})</li>
+<li>(CF = \text{Cumulative frequency before the median class})</li>
+<li>(f_m = \text{Frequency of the median class})</li>
+<li>(h = \text{Class width})</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>Would you like me to solve any part in detail?</p>
+<hr>
+<hr>
+<hr>
+
+</body>
+</html>
